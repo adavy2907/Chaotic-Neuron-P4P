@@ -1,8 +1,8 @@
 % Parameters
-k = 0.9;          % Decay parameter
+k = 0.5;          % Decay parameter
 alpha = 1.0;      % Strength of refractory effect
 a = 0.5;          % External input
-epsilon = 0.1;    % Steepness parameter
+epsilon = 0.04;    % Steepness parameter
 
 % Initial condition
 y0 = 0.11;         % Initial internal state

@@ -1,8 +1,8 @@
 % Parameters
-k = 0.9;              % Decay parameter
+k = 0.5;              % Decay parameter
 alpha = 1.0;          % Strength of refractory effect
-epsilon = 0.1;        % Steepness parameter
-a_values = linspace(0, 2, 200); % Range of external input (a) for Lyapunov exponent
+epsilon = 0.04;        % Steepness parameter
+a_values = linspace(0, 1, 200); % Range of external input (a) for Lyapunov exponent
 num_steps = 10000;    % Number of time steps for Lyapunov exponent calculation
 transient_steps = 1000; % Number of steps to discard (transient behavior)
 
