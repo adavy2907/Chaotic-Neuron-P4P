@@ -1,14 +1,14 @@
 % Parameters
 k = 0.5;          % Decay parameter
 alpha = 1.0;      % Strength of refractory effect
-a = 0.5;          % External input
+a = 0.1;          % External input
 epsilon = 0.04;    % Steepness parameter
 
 % Initial condition
 y0 = 0.11;         % Initial internal state
 
 % Time steps
-num_steps = 50; % Number of time steps
+num_steps = 200; % Number of time steps
 y = zeros(num_steps, 1); % Preallocate array for states
 y(1) = y0;        % Set initial state
 
