@@ -1,5 +1,5 @@
 % Parameters
-k = 0.9;          % Decay parameter
+k = 0.5;          % Decay parameter
 alpha = 1.0;      % Strength of refractory effect
 a = 0.5;          % External input
 
