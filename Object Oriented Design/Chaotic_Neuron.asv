@@ -1,0 +1,33 @@
+classdef Chaotic_Neuron
+
+    properties 
+
+        k {mustBeNumeric}
+        alpha {mustBeNumeric}
+        a {mustBeNumeric}
+        epsilon {mustBeNumeric}
+
+
+    end
+
+    methods
+
+        function obj = Chaotic_Neuron(k, alpha, a, epsilon)
+            obj.k = k;
+            obj.alpha = alpha;
+            obj.a = a;
+            obj.epsilon = epsilon;
+        end 
+
+        function y_next = chaotic_neuron(obj, y, @fx)
+            
+            f = fx(y, epsilon)
+
+            y_next = obj.k * y - alpha * f + a;
+        end 
+
+
+    end 
+
+
+end
