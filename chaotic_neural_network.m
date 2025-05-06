@@ -1,5 +1,5 @@
 % Parameters
-num_neurons = 3;      % Number of neurons in the network
+num_neurons = 2;      % Number of neurons in the network
 k = 0.9;               % Decay parameter
 alpha = 1.0;           % Strength of refractory effect
 epsilon = 0.1;         % Steepness parameter
@@ -9,27 +9,27 @@ transient_steps = 200; % Number of steps to discard (transient behavior)
 
 % UNCOMMENT BELOW FOR CIRCULAR NETOWRK 
 
-% % Initialize all weights to zero
-% W = zeros(num_neurons, num_neurons);
-% 
-% % Connect each neuron to the next one in a ring
-% for i = 1:num_neurons
-%     next = mod(i, num_neurons) + 1; % Circular connection (wrap around)
-%     W(next, i) = rand() - 0.5; % Neuron i affects neuron next
-% end
-% 
-% W = W ./ max(abs(W(:))); % Normalize weights to prevent instability
+% Initialize all weights to zero
+W = zeros(num_neurons, num_neurons);
 
-% UNCOMMENT BELOW FOR CONNECTED NETWORK
-
-% Synaptic weight matrix (randomly initialized)
-W = rand(num_neurons, num_neurons); % Random weights between 0 and 1
-
+% Connect each neuron to the next one in a ring
 for i = 1:num_neurons
-    W(i,i) = 0;
+    next = mod(i, num_neurons) + 1; % Circular connection (wrap around)
+    W(next, i) =  rand() - 0.5; % Neuron i affects neuron next by random weight
 end
 
 W = W ./ max(abs(W(:))); % Normalize weights to prevent instability
+
+% % UNCOMMENT BELOW FOR CONNECTED NETWORK
+% 
+% % Synaptic weight matrix (randomly initialized)
+% W = rand(num_neurons, num_neurons) - 0.5; % Random weights between -0.5 and 0.5
+% 
+% for i = 1:num_neurons
+%     W(i,i) = 0;
+% end
+% 
+% W = W ./ max(abs(W(:))); % Normalize weights to prevent instability
 
 % Initial conditions
 y = zeros(num_neurons, num_steps); % Internal states of all neurons
@@ -59,25 +59,19 @@ title('Activity of Chaotic Neurons in a Network');
 legend(arrayfun(@(i) sprintf('Neuron %d', i), 1:num_neurons, 'UniformOutput', false));
 grid on;
 
-% Create the directed graph
+
 G = digraph(W);
 
-% Create the plot
+
 figure;
 p = plot(G, 'Layout', 'auto', 'ArrowSize', 12, 'LineWidth', 2);
-
-% Set node labels
 p.NodeLabel = arrayfun(@(i) sprintf(int2str(i)), 1:num_neurons, 'UniformOutput', false);
-
-% Set edge labels to the weights
 LWidths = 5*abs(G.Edges.Weight);
 p.LineWidth = LWidths;
 
-% Display the actual weight values as labels
 edgeLabels = arrayfun(@(x) sprintf('%.2f', x), G.Edges.Weight, 'UniformOutput', false);
 labeledge(p, G.Edges.EndNodes(:,1), G.Edges.EndNodes(:,2), edgeLabels);
 
-% Style
 title('Neuron Network with Weights');
 p.NodeColor = 'black';
 p.MarkerSize = 7;
