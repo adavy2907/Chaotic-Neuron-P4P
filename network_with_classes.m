@@ -1,8 +1,8 @@
 % Parameters
 num_neurons = 3;      % Number of neurons in the network
-k = 0.9;              % Decay parameter
+k = 0.5;              % Decay parameter
 alpha = 1.0;          % Strength of refractory effect
-epsilon = 0.1;        % Steepness parameter
+epsilon = 0.04;        % Steepness parameter
 a = 0.5;              % External input (constant for all neurons)
 num_steps = 300;      % Number of time steps
 transient_steps = 200; % Number of steps to discard (transient behavior)
