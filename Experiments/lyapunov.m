@@ -3,6 +3,7 @@ k_values = linspace(0.3, 0.7, 10);
 alpha_values = linspace(0.8, 1.2, 10);
 epsilon_values = linspace(0.02, 0.06, 10);
 a = 0.5;  % Fixed external input
+slice_idx = 5
 
 num_steps = 1000;
 transient_steps = 800;
@@ -48,7 +49,9 @@ end
 [X, Y] = meshgrid(alpha_values, k_values);
 Z = lyap_exp(:,:,slice_idx);
 figure;
-surf(X, Y, Z);
+surf(X, Y, Z, 'EdgeColor', 'none');
+% Z0 = zeros(size(Z));
+% surf(X, Y, Z0, 'FaceAlpha', 0.3, 'EdgeColor', 'none', 'FaceColor', [0.2 0.2 0.2]);
 xlabel('alpha');
 ylabel('k');
 zlabel('Lyapunov Exponent');

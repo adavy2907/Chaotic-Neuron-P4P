@@ -17,7 +17,7 @@ W = zeros(num_neurons, num_neurons);
 % Connect each neuron to the next one in a ring
 for i = 1:num_neurons
     next = mod(i, num_neurons) + 1; % Circular connection (wrap around)
-    W(next, i) =  rand() - 0.5; % Neuron i affects neuron next by random weight
+    W(next, i) =  rand(); % Neuron i affects neuron next by random weight
 end
 
 W = W ./ max(abs(W(:))); % Normalize weights to prevent instability

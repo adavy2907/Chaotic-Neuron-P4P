@@ -17,7 +17,7 @@ function hodgkin_huxley
     y0 = [V0; m0; h0; n0];
 
     % Time span
-    tspan = [0 50]; % Simulation time (ms)
+    tspan = [0 100]; % Simulation time (ms)
 
     % Solve the ODEs
     [t, y] = ode45(@(t, y) hh_ode(t, y, Cm, gNa, gK, gL, ENa, EK, EL, Iext), tspan, y0);

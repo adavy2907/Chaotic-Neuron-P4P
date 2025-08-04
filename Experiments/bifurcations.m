@@ -1,7 +1,7 @@
 % Define ranges for parameters
-k_values = [0.01,0.1,0.3, 0.5, 0.7,0.9, 0.99];
-alpha_values = [0.8];
-epsilon_values = [0.06];
+k_values = [0.01,0.1,0.3, 0.5, 0.7,0.9];
+alpha_values = [1];
+epsilon_values = [0.04];
 
 a_values = linspace(0, 1, 500); % External input range
 num_steps = 1000;               % Total simulation steps

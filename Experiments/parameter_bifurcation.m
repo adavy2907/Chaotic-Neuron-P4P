@@ -6,7 +6,7 @@ transient_steps = 800;
 
 % Range for a and k
 a_values = linspace(0, 1, 300);       % External input
-k_values = linspace(0.2, 0.8, 100);   % Decay parameter
+k_values = linspace(0.2, 0.8, 50);   % Decay parameter
 
 % Preallocate result containers
 results = [];

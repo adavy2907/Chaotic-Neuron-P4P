@@ -1,18 +1,19 @@
 % Parameters
-a_values = linspace(0, 1, 100); % Range of external input (a)
-k_values = linspace(0, 1, 100); % Range of decay parameter (k)
-num_steps = 1000;      % Number of time steps
-transient_steps = 200; % Number of steps to discard (transient behavior)
-epsilon = 0.04;        % Steepness parameter (fixed)
+a_values = linspace(0, 1, 100);       % Range of external input (a)
+alpha_values = linspace(0, 2, 100);   % Range of gain parameter (alpha)
+num_steps = 1000;                     % Number of time steps
+transient_steps = 200;               % Number of steps to discard (transient behavior)
+epsilon = 0.04;                       % Steepness parameter (fixed)
+k = 0.5;                              % Fixed decay parameter
 
 % Preallocate matrix to store Lyapunov exponents
-lyapunov_exponents = zeros(length(k_values), length(a_values));
+lyapunov_exponents = zeros(length(alpha_values), length(a_values));
 
-% Loop over different values of a and k
+% Loop over different values of a and alpha
 for i = 1:length(a_values)
-    for j = 1:length(k_values)
+    for j = 1:length(alpha_values)
         a = a_values(i);
-        k = k_values(j);
+        alpha = alpha_values(j);
         
         % Initial condition
         y = zeros(num_steps, 1);
@@ -20,7 +21,7 @@ for i = 1:length(a_values)
         
         % Discard transient behavior
         for t = 1:transient_steps
-            y(t+1) = chaotic_neuron(y(t), k, 1.0, a, epsilon); % alpha = 1.0
+            y(t+1) = chaotic_neuron(y(t), k, alpha, a, epsilon);
         end
         
         % Compute the Lyapunov exponent
@@ -33,7 +34,7 @@ for i = 1:length(a_values)
             lyapunov_sum = lyapunov_sum + log(abs(df_dy));
             
             % Update the state
-            y(t+1) = chaotic_neuron(y(t), k, 1.0, a, epsilon);
+            y(t+1) = chaotic_neuron(y(t), k, alpha, a, epsilon);
         end
         
         % Store the Lyapunov exponent
@@ -41,7 +42,7 @@ for i = 1:length(a_values)
     end
 end
 
-% Flip the matrix vertically so k=0 is at the bottom and k=1 is at the top
+% Flip the matrix vertically so alpha = 0 is at the bottom
 lyapunov_exponents = flipud(lyapunov_exponents);
 
 % Define a sharply contrasting colormap: dark blue → white → bright red
@@ -62,10 +63,10 @@ clim = [-clip_val, clip_val];
 
 % Plot
 figure;
-imagesc(a_values, k_values, lyapunov_exponents);
+imagesc(a_values, alpha_values, lyapunov_exponents);
 xlabel('External Input (a)');
-ylabel('Decay Parameter (k)');
-title('Lyapunov Exponents (a vs k)');
+ylabel('Refractory Strength (\alpha)');
+title('Lyapunov Exponents (a vs \alpha)');
 colorbar;
 colormap(cmap);
 caxis(clim); % Fix color scaling to highlight zero crossing
@@ -73,4 +74,4 @@ axis xy;
 
 % Optional: add a black contour at λ = 0 for clarity
 hold on;
-contour(a_values, k_values, lyapunov_exponents, [0 0], 'k', 'LineWidth', 1.5);
+contour(a_values, alpha_values, lyapunov_exponents, [0 0], 'k', 'LineWidth', 1.5);
