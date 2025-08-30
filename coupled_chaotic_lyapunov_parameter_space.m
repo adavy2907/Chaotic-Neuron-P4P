@@ -79,20 +79,26 @@ end
     clip_val = min(clip_val, 1);  % Cap at ±1
     clim = [-clip_val, clip_val];
 
-    % Plot
-    figure;
-    imagesc(a_values, k_values, lyap_exp);
-    xlabel('External Input (a)');
-    ylabel('Decay Parameter (k)');
-    title('Lyapunov Exponents (Coupled Chaotic Neurons)');
-    colorbar;
-    colormap(cmap);
-    caxis(clim);
-    axis xy;
+    % % Plot
+    % figure;
+    % imagesc(a_values, k_values, lyap_exp);
+    % xlabel('External Input (a)');
+    % ylabel('Decay Parameter (k)');
+    % title('Lyapunov Exponents (Coupled Chaotic Neurons)');
+    % colorbar;
+    % colormap(cmap);
+    % caxis(clim);
+    % axis xy;
+    % 
+    % % Add contour at λ = 0
+    % hold on;
+    % contour(a_values, k_values, lyap_exp, [0 0], 'k', 'LineWidth', 1.5);
 
-    % Add contour at λ = 0
-    hold on;
-    contour(a_values, k_values, lyap_exp, [0 0], 'k', 'LineWidth', 1.5);
+    % plot(y1, y2); % Trajectory in y1-y2 plane
+    % xlabel('y_1'); ylabel('y_2'); title('Phase Space');
+
+    plot(time, y1 - y2); ylabel('y_1 - y_2'); title('Synchronization Difference');
+
 end
 
 function y_next = chaotic_neuron(y, k, alpha, a, epsilon)

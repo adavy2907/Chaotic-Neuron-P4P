@@ -1,5 +1,6 @@
 % Parameters
-k = 0.5;
+k_2 = 0.5;
+k_1 = 0.6;
 alpha = 1.0;
 epsilon = 0.04;      % Steep sigmoid
 numSteps = 1000;
@@ -28,12 +29,12 @@ for idx = 1:length(aVals)
 
     for t = 1:numSteps
         % Original system
-        y1_next = chaotic_neuron(y1, k, alpha, a, epsilon) + coupling * (y2 - y1);
-        y2_next = chaotic_neuron(y2, k, alpha, a, epsilon) + coupling * (y1 - y2);
+        y1_next = chaotic_neuron(y1, k_1, alpha, a, epsilon) + coupling * (y2 - y1);
+        y2_next = chaotic_neuron(y2, k_2, alpha, a, epsilon) + coupling * (y1 - y2);
 
         % Perturbed system
-        y1p_next = chaotic_neuron(y1p, k, alpha, a, epsilon) + coupling * (y2p - y1p);
-        y2p_next = chaotic_neuron(y2p, k, alpha, a, epsilon) + coupling * (y1p - y2p);
+        y1p_next = chaotic_neuron(y1p, k_1, alpha, a, epsilon) + coupling * (y2p - y1p);
+        y2p_next = chaotic_neuron(y2p, k_2, alpha, a, epsilon) + coupling * (y1p - y2p);
 
         % Lyapunov exponent estimate
         dx = [y1p_next - y1_next, y2p_next - y2_next];
@@ -65,7 +66,7 @@ figure('Color','w');
 subplot(2,1,1)
 plot(bifurcation_a, bifurcation_y1, '.k', 'MarkerSize', 1);
 ylabel('y_1');
-title('Bifurcation Diagram (Coupled Chaotic Neurons, varying a)');
+title('Bifurcation diagram of single neuron in coupled system (varying a)');
 grid on;
 
 subplot(2,1,2)
