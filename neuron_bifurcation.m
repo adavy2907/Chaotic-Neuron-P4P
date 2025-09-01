@@ -1,8 +1,8 @@
 % Parameters
 k = 0.5;              % Decay parameter
-alpha = 1.0;           % Strength of refractory effect
+alpha = 9;           % Strength of refractory effect
 epsilon = 0.04;         % Steepness parameter
-a_values = linspace(0, 1, 500); % Range of external input (a) for bifurcation
+a_values = linspace(1, 3, 500); % Range of external input (a) for bifurcation
 num_steps = 1000;      % Number of time steps
 transient_steps = 800; % Number of steps to discard (transient behavior)
 
