@@ -1,5 +1,5 @@
 % Define ranges for parameters
-k_values = [0.01,0.1,0.3, 0.5, 0.7,0.9];
+k_values = [0.5];
 alpha_values = [1];
 epsilon_values = [0.04];
 
@@ -10,7 +10,7 @@ transient_steps = 800;          % Discard this many steps
 % Create a figure to hold all subplots
 figure;
 plot_idx = 1;
-num_plots = length(k_values) * length(alpha_values) * length(epsilon_values);
+num_plots = length(alpha_values);
 
 for ki = 1:length(k_values)
     for ai = 1:length(alpha_values)

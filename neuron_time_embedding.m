@@ -20,10 +20,6 @@ for i = 1:N
     embedded_3D(i, :) = y(i:tau:i + (m-1)*tau);
 end
 
-% Make figure
-fig = figure;
-set(fig, 'Color', 'w');
-filename = 'chaotic_neuron.gif';
 
 for t = 2:N
     clf;
@@ -47,21 +43,9 @@ for t = 2:N
     grid on; axis tight;
     view(30,30);
     
-    % --- Capture frame ---
-    drawnow;
-    frame = getframe(fig);
-    im = frame2im(frame);
-    [A,map] = rgb2ind(im,256);
-    
-    % Write to GIF
-    if t == 2
-        imwrite(A,map,filename,'gif','LoopCount',Inf,'DelayTime',0.05);
-    else
-        imwrite(A,map,filename,'gif','WriteMode','append','DelayTime',0.05);
-    end
 end
 
-disp('GIF saved as chaotic_neuron.gif');
+
 
 % Chaotic neuron function
 function y_next = chaotic_neuron(y, k, alpha, a, epsilon)
